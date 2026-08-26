@@ -1,0 +1,20 @@
+{
+  "name": "facade-orthophoto",
+  "interface": {
+    "displayName": "Facade Orthophoto"
+  },
+  "plugins": [
+    {
+      "name": "facade-orthophoto",
+      "source": {
+        "source": "local",
+        "path": "./plugins/facade-orthophoto"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "facade-orthophoto",
+  "version": "0.1.0",
+  "description": "Generate seamless, metric facade ortho-elevations from overlapping photos.",
+  "author": {
+    "name": "Mingwei Wang",
+    "url": "https://github.com/Architect-Mingwei"
+  },
+  "repository": "https://github.com/Architect-Mingwei/facade-orthophoto",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Facade Orthophoto",
+    "shortDescription": "Stitch facade photos into a seamless, level ortho-elevation.",
+    "longDescription": "Generate a seamless, metric, frontal ortho-elevation of a building facade from overlapping photos using COLMAP/pycolmap, with automatic quality checks (level/plumb, brightness, coverage, sharpness, seams) and parameter adjustments.",
+    "developerName": "Mingwei Wang",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Generate a facade ortho-elevation from my photos."
+  }
+}
