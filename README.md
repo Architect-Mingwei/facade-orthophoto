@@ -32,26 +32,45 @@ pip install pycolmap opencv-python-headless==4.10 numpy
 
 ## Installation
 
-### Method 1: install the skill directly
+### Method 1: add this repository as a plugin marketplace
 
 ```bash
-codex skill install facade-orthophoto \
+codex plugin marketplace add Architect-Mingwei/facade-orthophoto
+codex plugin add facade-orthophoto@facade-orthophoto
+```
+
+The marketplace and the plugin are both named `facade-orthophoto`, so the
+selector above reads `PLUGIN@MARKETPLACE`. You can also add the marketplace
+with `codex plugin marketplace add ./facade-orthophoto` after cloning, or add
+it in the Codex app and install the plugin from there.
+
+### Method 2: install the skill without the plugin
+
+The skill itself lives at `plugins/facade-orthophoto/skills/facade-orthophoto/`.
+Copy that folder into your skills directory, which defaults to
+`$CODEX_HOME/skills` (`~/.codex/skills`):
+
+```bash
+git clone --depth 1 https://github.com/Architect-Mingwei/facade-orthophoto.git
+mkdir -p ~/.codex/skills
+cp -R facade-orthophoto/plugins/facade-orthophoto/skills/facade-orthophoto \
+  ~/.codex/skills/
+```
+
+On Windows PowerShell the same two steps are `New-Item -ItemType Directory` and
+`Copy-Item -Recurse` into `$env:CODEX_HOME\skills` (default
+`$HOME\.codex\skills`).
+
+If you have the `skill-installer` skill, the equivalent fetch is:
+
+```bash
+python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo Architect-Mingwei/facade-orthophoto \
-  --path skills/facade-orthophoto
+  --path plugins/facade-orthophoto/skills/facade-orthophoto
 ```
 
-After installation, the skill is available as `facade-orthophoto` (or triggers
-on requests like "make a facade ortho-elevation from these photos").
-
-### Method 2: add this repository as a plugin marketplace
-
-```bash
-git clone https://github.com/Architect-Mingwei/facade-orthophoto.git
-codex plugin marketplace add ./facade-orthophoto
-```
-
-Then install the `facade-orthophoto` plugin from the marketplace in the Codex
-app.
+Either way the skill is available as `facade-orthophoto` (or triggers on
+requests like "make a facade ortho-elevation from these photos").
 
 ## Usage
 
@@ -59,7 +78,7 @@ Put overlapping facade photos in one folder (roughly 70%+ overlap works best),
 then run:
 
 ```bash
-python skills/facade-orthophoto/scripts/facade_ortho.py \
+python plugins/facade-orthophoto/skills/facade-orthophoto/scripts/facade_ortho.py \
   --image_dir ./facade_photos \
   --output_dir ./out
 ```
@@ -67,7 +86,7 @@ python skills/facade-orthophoto/scripts/facade_ortho.py \
 Re-runs that only tune blending can skip SfM:
 
 ```bash
-python skills/facade-orthophoto/scripts/facade_ortho.py \
+python plugins/facade-orthophoto/skills/facade-orthophoto/scripts/facade_ortho.py \
   --image_dir ./facade_photos \
   --output_dir ./out \
   --skip_sfm --bands 5 --seam_scale 0.25
@@ -85,7 +104,7 @@ treating the defaults as fixed:
   `--seam_scale` for finer/coarser seam placement.
 
 Full thresholds and the exact knob for each failure are in
-[`skills/facade-orthophoto/references/quality_checks.md`](skills/facade-orthophoto/references/quality_checks.md).
+[`references/quality_checks.md`](plugins/facade-orthophoto/skills/facade-orthophoto/references/quality_checks.md).
 
 ## Repository layout
 
